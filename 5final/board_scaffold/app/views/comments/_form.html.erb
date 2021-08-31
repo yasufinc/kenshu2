@@ -1,0 +1,11 @@
+
+
+<%= form_with(model: [@my_thread, @comment]) do |form| %>
+  <p>
+    <%= form.text_field :body %>
+  </p>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

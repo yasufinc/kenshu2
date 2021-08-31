@@ -1,0 +1,42 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @my_thread.title %>
+</p>
+
+<%= link_to 'Edit', edit_my_thread_path(@my_thread) %> |
+<%= link_to 'Back', my_threads_path %>
+
+
+
+<h3>Comments</h3>
+
+<% if @my_thread.comments.any? %>
+  <table>
+    <tbody>
+      <% @my_thread.comments.each do |comment| %>
+      <tr>
+        <td><%= comment.body %></td>
+        <td><%= link_to 'Edit', edit_my_thread_comment_path(@my_thread, comment) %></td>
+        <td><%= link_to 'Destroy', my_thread_comment_path(@my_thread, comment), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+
+
+
+
+<%= form_with(model: [@my_thread, @my_thread.comments.build]) do |form| %>
+  <p>
+    <%= form.label :new_comment %>
+    <%= form.text_field :body %>
+  </p>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
