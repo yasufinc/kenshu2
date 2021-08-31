@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BoardPlus</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <header>
+      <% if user_signed_in? %>
+        <p>
+          <%= p "ログイン中のユーザ: #{current_user.email}さん" %>
+        </p>
+      <% end %>
+    </header>
+
+    <!-- flash[:notice], flash[:alert]を表示する -->
+    <p class="notice" id="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+
+    <%= yield %>
+
+    <% if user_signed_in? %>
+    <p>
+      <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
+    </p>
+    <% end %>
+
+  </body>
+</html>

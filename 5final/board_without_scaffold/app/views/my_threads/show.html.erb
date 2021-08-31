@@ -1,0 +1,33 @@
+<p>
+  <strong>Title:</strong>
+  <%= @my_thread.title %>
+</p>
+
+
+
+<h4>Comments</h4>
+
+<% if @my_thread.comments.any? %>
+  <table>
+    <tbody>
+      <% @my_thread.comments.each do |comment| %>
+      <tr>
+        <td><%= comment.body %></td>
+        <% if current_user.id == comment.user_id  %>
+        <td><%= link_to '[Edit]', edit_my_thread_comment_path(@my_thread, comment) %></td>
+        <td><%= link_to '[x]', my_thread_comment_path(@my_thread, comment), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+
+<%= render 'comments/form', model: [@my_thread, @my_thread.comments.build] %>
+
+
+
+<p>
+  <%= link_to '戻る', my_threads_path %>
+</p>

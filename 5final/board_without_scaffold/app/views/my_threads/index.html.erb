@@ -1,0 +1,29 @@
+<h1>掲示板</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>記事一覧</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @my_threads.each do |my_thread| %>
+      <tr>
+        <td><%= link_to my_thread.title, my_thread %></td>
+        <% if current_user.id == my_thread.user_id  %>
+          <td><%= link_to '[Edit]', edit_my_thread_path(my_thread) %></td>
+          <td><%= link_to '[x]',
+            my_thread,
+            method: :delete,
+            data: { confirm: 'Are you sure?' } %>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to '新規スレッド作成', new_my_thread_path %>
